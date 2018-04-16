@@ -30,8 +30,8 @@ public class Movement : MonoBehaviour
 	void Update () 
 	{
         SetInputs();
-        Debug.Log(horizontal);
-        Debug.Log(vertical);
+        //Debug.Log(horizontal);
+        //Debug.Log(vertical);
         Move();
 	}
 
