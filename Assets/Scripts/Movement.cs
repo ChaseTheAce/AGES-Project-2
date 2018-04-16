@@ -10,6 +10,9 @@ public class Movement : MonoBehaviour
     [SerializeField]
     float runSpeed = 8f;
 
+    [SerializeField]
+    public GameObject moveableCharacter;
+
     Rigidbody2D playerRigidbody2D;
 
     Vector2 moveDirection;
@@ -22,7 +25,7 @@ public class Movement : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-        playerRigidbody2D = GetComponent<Rigidbody2D>();
+        playerRigidbody2D = moveableCharacter.GetComponent<Rigidbody2D>();
         
     }
 	
@@ -30,6 +33,7 @@ public class Movement : MonoBehaviour
 	void Update () 
 	{
         SetInputs();
+        
         //Debug.Log(horizontal);
         //Debug.Log(vertical);
         Move();
@@ -43,20 +47,24 @@ public class Movement : MonoBehaviour
 
     private void Move()
     {
-        //if (Input.GetAxis("Horizontal") > .5f || Input.GetAxis("Horizontal") > -.5f)
-        //{
-        //    moveDirection = horizontal;
-        //    playerRigidbody2D.AddForce(moveDirection * walkSpeed);
-        //}
-
-        //if (Input.GetAxis("Vertical") > .5f || Input.GetAxis("Vertical") > -.5f)
-        //{
-        //    moveDirection = vertical;
-        //    playerRigidbody2D.AddForce(moveDirection * walkSpeed);
-        //}
 
         playerRigidbody2D.velocity =
             new Vector2(horizontal, vertical) * walkSpeed * Time.deltaTime;
+    }
+
+    private void UpdateRigidBody()
+    {
+        playerRigidbody2D = moveableCharacter.GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable()
+    {
+        SpawnCreature.AvatarChanged += UpdateRigidBody;
+    }
+
+    private void OnDisable()
+    {
+        SpawnCreature.AvatarChanged -= UpdateRigidBody;
     }
 
 }

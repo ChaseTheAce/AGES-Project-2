@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnCreature : MonoBehaviour 
 {
+    public static event Action AvatarChanged;
+
     [SerializeField]
     Creature creature1;
 
@@ -16,6 +19,14 @@ public class SpawnCreature : MonoBehaviour
     [SerializeField]
     Transform spawnPoint;
 
+    [SerializeField]
+    Movement movement;
+
+    [SerializeField]
+    CameraController cameraController;
+
+    
+
     private void Update()
     {
         Spawn();
@@ -25,8 +36,15 @@ public class SpawnCreature : MonoBehaviour
     {
         if (Input.GetButtonDown("Spawn"))
         {
-            Creature creature = Instantiate(creature1, spawnPoint) as Creature;
+            GameObject creature = Instantiate(creature2, spawnPoint) as GameObject;
             creature.transform.parent = null;
+            movement.moveableCharacter = creature;
+            cameraController.avatarToFollow = creature;
+
+            if (AvatarChanged != null)
+            {
+                AvatarChanged.Invoke();
+            }
         }
         
     }
