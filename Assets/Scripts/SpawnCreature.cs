@@ -8,6 +8,9 @@ public class SpawnCreature : MonoBehaviour
     public static event Action AvatarChanged;
 
     [SerializeField]
+    GameObject player;
+
+    [SerializeField]
     Creature creature1;
 
     [SerializeField]
@@ -25,7 +28,9 @@ public class SpawnCreature : MonoBehaviour
     [SerializeField]
     CameraController cameraController;
 
-    
+    GameObject creature;
+
+    bool isPlayingCreature = false;
 
     private void Update()
     {
@@ -34,17 +39,31 @@ public class SpawnCreature : MonoBehaviour
 
     private void Spawn()
     {
-        if (Input.GetButtonDown("Spawn"))
+        if (Input.GetButtonDown("Spawn") && (isPlayingCreature == false))
         {
-            GameObject creature = Instantiate(creature2, spawnPoint) as GameObject;
+            creature = Instantiate(creature2, spawnPoint) as GameObject;
             creature.transform.parent = null;
             movement.moveableCharacter = creature;
             cameraController.avatarToFollow = creature;
+            isPlayingCreature = true;
 
             if (AvatarChanged != null)
             {
                 AvatarChanged.Invoke();
             }
+        }
+        else if (Input.GetButtonDown("Spawn") && (isPlayingCreature == true))
+        {
+            movement.moveableCharacter = player;
+            cameraController.avatarToFollow = player;
+            isPlayingCreature = false;
+
+            if (AvatarChanged != null)
+            {
+                AvatarChanged.Invoke();
+            }
+
+            Destroy(creature);
         }
         
     }
