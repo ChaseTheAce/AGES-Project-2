@@ -6,12 +6,13 @@ using UnityEngine;
 public class SpawnCreature : MonoBehaviour 
 {
     public static event Action AvatarChanged;
-
+    
+    #region Serialized Fields
     [SerializeField]
     GameObject player;
 
     [SerializeField]
-    Creature creature1;
+    GameObject creature1;
 
     [SerializeField]
     GameObject creature2;
@@ -27,32 +28,100 @@ public class SpawnCreature : MonoBehaviour
 
     [SerializeField]
     CameraController cameraController;
+    #endregion
+
+    GameObject selectedCreature;
 
     GameObject creature;
 
     bool isPlayingCreature = false;
 
+    List<GameObject> spawnedCreatures;
+
+    private void Start()
+    {
+        spawnedCreatures = new List<GameObject>();
+        selectedCreature = creature1;
+    }
+
     private void Update()
     {
+        SelectCreature();
+        Switch();
         Spawn();
     }
 
-    private void Spawn()
+    private void SelectCreature()
     {
-        if (Input.GetButtonDown("Spawn") && (isPlayingCreature == false))
+        if (Input.GetButtonDown("Select1"))
         {
-            creature = Instantiate(creature2, spawnPoint) as GameObject;
-            creature.transform.parent = null;
-            movement.moveableCharacter = creature;
-            cameraController.avatarToFollow = creature;
-            isPlayingCreature = true;
-
-            if (AvatarChanged != null)
-            {
-                AvatarChanged.Invoke();
-            }
+            selectedCreature = creature1;
+            ControlSelectedCreature();
         }
-        else if (Input.GetButtonDown("Spawn") && (isPlayingCreature == true))
+        //if ((Input.GetButtonDown("Select1") && isPlayingCreature == false))
+        //{
+        //    selectedCreature = creature1;
+        //}
+        if (Input.GetButtonDown("Select2"))
+        {
+            selectedCreature = creature2;
+            ControlSelectedCreature();
+        }
+        //if (Input.GetButtonDown("Select3") && isPlayingCreature == false)
+        //{
+        //    selectedCreature = creature3;
+        //}
+        if (Input.GetButtonDown("Select3"))
+        {
+            selectedCreature = creature3;
+            ControlSelectedCreature();
+        }
+        //if (Input.GetButtonDown("Select3") && isPlayingCreature == false)
+        //{
+        //    selectedCreature = creature3;
+        //}
+    }
+
+    private void ControlSelectedCreature()
+    {
+        foreach (GameObject creature in spawnedCreatures)
+        {
+            if (creature.tag == selectedCreature.tag)
+            {
+                movement.moveableCharacter = creature;
+                cameraController.avatarToFollow = creature;
+                isPlayingCreature = true;
+
+                if (AvatarChanged != null)
+                {
+                    AvatarChanged.Invoke();
+                }
+            }
+
+        }
+    }
+
+    #region Button Fucntions
+    public void SelectCreature1BtnPressed()
+    {
+        selectedCreature = creature1;
+    }
+
+    public void SelectCreature2BtnPressed()
+    {
+        selectedCreature = creature2;
+    }
+
+    public void SelectCreature3BtnPressed()
+    {
+        selectedCreature = creature3;
+    }
+    #endregion
+
+    private void Switch()
+    {
+        // Switches back to main character if the user is controlling a creature 
+        if (Input.GetButtonDown("Switch") && (isPlayingCreature == true))
         {
             movement.moveableCharacter = player;
             cameraController.avatarToFollow = player;
@@ -63,6 +132,71 @@ public class SpawnCreature : MonoBehaviour
                 AvatarChanged.Invoke();
             }
 
+        }
+        // Switches to the creature if the user is controlling a creature
+        //else if (Input.GetButtonDown("Switch") && (isPlayingCreature == false))
+        //{
+        //    movement.moveableCharacter = creature;
+        //    cameraController.avatarToFollow = creature;
+        //    isPlayingCreature = true;
+
+        //    if (AvatarChanged != null)
+        //    {
+        //        AvatarChanged.Invoke();
+        //    }
+        //}
+    }
+
+    private void Spawn()
+    {
+        // Spawns a creature if the user is not currently controlling a creature
+        if (Input.GetButtonDown("Spawn") && (isPlayingCreature == false))
+        {
+            if (creature != null)
+            {
+                List<GameObject> tempList = new List<GameObject>();
+
+                foreach (GameObject creature in spawnedCreatures)
+                {
+                    if (creature != null)
+                        tempList.Add(creature);                   
+                }
+
+                foreach (GameObject creature in tempList)
+                {
+                    if (creature.tag == selectedCreature.tag)
+                    {
+                        spawnedCreatures.Remove(creature);
+                        Destroy(creature.gameObject);
+                    }
+                }
+                
+            }
+            creature = Instantiate(selectedCreature, spawnPoint) as GameObject;
+            creature.transform.parent = null;
+            movement.moveableCharacter = creature;
+            cameraController.avatarToFollow = creature;
+            isPlayingCreature = true;
+            spawnedCreatures.Add(creature);
+
+            if (AvatarChanged != null)
+            {
+                AvatarChanged.Invoke();
+            }
+        }
+        // Destroys the currently controlled creature and swtiches back to main character
+        else if (Input.GetButtonDown("Despawn") && (isPlayingCreature == true))
+        {
+            movement.moveableCharacter = player;
+            cameraController.avatarToFollow = player;
+            isPlayingCreature = false;
+
+            if (AvatarChanged != null)
+            {
+                AvatarChanged.Invoke();
+            }
+
+            spawnedCreatures.Remove(creature);
             Destroy(creature);
         }
         

@@ -53,10 +53,15 @@ public class Movement : MonoBehaviour
     }
 
     private void UpdateRigidBody()
-    {
+    {        
         playerRigidbody2D.velocity = Vector2.zero;
         playerRigidbody2D.isKinematic = true;
         playerRigidbody2D = moveableCharacter.GetComponent<Rigidbody2D>();
+
+        if (playerRigidbody2D.isKinematic == true)
+        {
+            playerRigidbody2D.isKinematic = false;
+        }
     }
 
     private void OnEnable()
