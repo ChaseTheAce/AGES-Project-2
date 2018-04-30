@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class LocationData : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
+        GameManager.Instance.SpawnPlayer();
         GameManager.Load();
     }
 

@@ -61,6 +61,7 @@ public class SpawnCreature : MonoBehaviour
 
     private void SelectCreature()
     {
+
         if (Input.GetButtonDown("Select1"))
         {
             selectedCreature = creature1;
@@ -136,6 +137,12 @@ public class SpawnCreature : MonoBehaviour
 
     private void Switch()
     {
+        if (player == null)
+        {
+            player = GameManager.Instance.spawnedPlayer;
+            spawnPoint = GameObject.Find("CreatureSpawn").transform;
+        }
+
         // Switches back to main character if the user is controlling a creature 
         if (Input.GetButtonDown("Switch") && (isPlayingCreature == true))
         {
@@ -165,6 +172,12 @@ public class SpawnCreature : MonoBehaviour
 
     private void Spawn()
     {
+        if (player == null)
+        {
+            player = GameManager.Instance.spawnedPlayer;
+            spawnPoint = GameObject.Find("CreatureSpawn").transform;
+        }
+
         // Spawns a creature if the user is not currently controlling a creature
         if (Input.GetButtonDown("Spawn") && (isPlayingCreature == false))
         {

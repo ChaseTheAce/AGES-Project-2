@@ -51,6 +51,7 @@ public class Movement : MonoBehaviour
 
         playerRigidbody2D.velocity =
             new Vector2(horizontal, vertical) * walkSpeed * Time.deltaTime;
+
     }
 
     private void UpdateRigidBody()

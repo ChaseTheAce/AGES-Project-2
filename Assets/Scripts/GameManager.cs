@@ -37,11 +37,11 @@ public class GameManager : MonoBehaviour
 
 
         // Instantiate player prefab if 1st time running
-        if (hasEnteredDoor == false)
-        {
-            spawnedPlayer = Instantiate(playerPrefab, startingSpawn) as GameObject;
-            spawnedPlayer.transform.parent = null;
-        }
+        //if (hasEnteredDoor == false)
+        //{
+        //    spawnedPlayer = Instantiate(playerPrefab, startingSpawn) as GameObject;
+        //    spawnedPlayer.transform.parent = null;
+        //}
         
     }
 
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
             SaveData saveData = (SaveData)binaryFormatter.Deserialize(file);
             file.Close();
 
-            GameObject player1 = GameObject.Find("Player");
+            GameObject player1 = Instance.spawnedPlayer;
             Debug.Log(saveData.playerYPos);
             MoveCharacter(player1, saveData.playerXPos, saveData.playerYPos);
         }
@@ -84,9 +84,17 @@ public class GameManager : MonoBehaviour
     {
         if (characterToMove != null)
         {
-            characterToMove.transform.position = new Vector2(locationX, locationY);
+            if (characterToMove != Door.characterToEnter)
+                characterToMove.transform.position = new Vector2(locationX, locationY);
+
         }
         
+    }
+
+    public void SpawnPlayer()
+    {
+        spawnedPlayer = Instantiate(playerPrefab, startingSpawn) as GameObject;
+        spawnedPlayer.transform.parent = null;
     }
 }
 
@@ -95,5 +103,11 @@ public class SaveData
 {
     public float playerXPos;
     public float playerYPos;
+
+    public float creature1XPos;
+    public float creature1YPos;
+
+    public float creature2pos;
+    public float creature2Pos;
 
 }

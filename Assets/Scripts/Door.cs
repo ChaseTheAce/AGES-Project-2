@@ -14,6 +14,8 @@ public class Door : MonoBehaviour {
     [SerializeField]
     bool isSaveOnUse = true;
 
+    public static bool isInside = false;
+
     string sceneName;
 
     public static GameObject characterToEnter;
@@ -56,6 +58,7 @@ public class Door : MonoBehaviour {
         if (isSaveOnUse)
             RecordPlayerPos(GameManager.SaveObjectLocation(player));
 
+        isInside = true;
         SceneManager.LoadScene(sceneName);
         
     }
