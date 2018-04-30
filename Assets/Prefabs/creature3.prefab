@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 50573535647474048}
   - component: {fileID: 114799412715462966}
   - component: {fileID: 58590896260959558}
-  - component: {fileID: 114366308509847898}
   m_Layer: 0
   m_Name: creature3
   m_TagString: Creature3
@@ -79,17 +78,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &114366308509847898
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1393871136785286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9e55609236ccaa4a987e0228127ba68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114799412715462966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ac0170c3039da4d80feca56d04435d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
 --- !u!212 &212272278854800272
 SpriteRenderer:
   m_ObjectHideFlags: 1

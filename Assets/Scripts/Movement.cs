@@ -8,9 +8,6 @@ public class Movement : MonoBehaviour
     float walkSpeed = 5f;
 
     [SerializeField]
-    float runSpeed = 8f;
-
-    [SerializeField]
     public GameObject moveableCharacter;    
 
     Rigidbody2D playerRigidbody2D;
@@ -25,8 +22,12 @@ public class Movement : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-        playerRigidbody2D = moveableCharacter.GetComponent<Rigidbody2D>();
         
+        if (moveableCharacter == null)
+        {
+            moveableCharacter = GameManager.Instance.spawnedPlayer;
+        }
+        playerRigidbody2D = moveableCharacter.GetComponent<Rigidbody2D>();
     }
 	
 	// Update is called once per frame

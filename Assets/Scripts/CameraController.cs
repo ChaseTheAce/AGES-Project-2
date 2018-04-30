@@ -17,7 +17,13 @@ public class CameraController : MonoBehaviour
     {
         if (avatarToFollow == null)
         {
-            avatarToFollow = Door.characterToEnter;
+            if(Door.characterToEnter != null)
+                avatarToFollow = Door.characterToEnter;
+            else if (Door.characterToEnter == null)
+            {
+                avatarToFollow = GameObject.FindGameObjectWithTag("Player");
+            }
+
         }
 
         playerTransform = avatarToFollow.GetComponent<Transform>();

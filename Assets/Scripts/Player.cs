@@ -7,21 +7,6 @@ public class Player : MonoBehaviour
 {
 
 
-    [SerializeField]
-    float maxHealth;
-
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
-
     public void Die()
     {
         Scene currentScene = SceneManager.GetActiveScene();

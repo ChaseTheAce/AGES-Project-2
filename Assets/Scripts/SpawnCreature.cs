@@ -44,6 +44,12 @@ public class SpawnCreature : MonoBehaviour
     {
         spawnedCreatures = new List<GameObject>();
         selectedCreature = creature1;
+
+        if (player == null)
+        {
+            player = GameManager.Instance.spawnedPlayer;
+            spawnPoint = GameObject.Find("CreatureSpawn").transform;
+        }
     }
 
     private void Update()

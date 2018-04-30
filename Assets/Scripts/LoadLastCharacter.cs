@@ -15,21 +15,23 @@ public class LoadLastCharacter : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        if (Door.characterToEnter != null)
+        if (GameManager.hasEnteredDoor)
         {
-            characterToMove = Door.characterToEnter;
+
+
+            if (Door.characterToEnter != null)
+            {
+                characterToMove = Door.characterToEnter;
+            }
+            else
+            {
+                characterToMove = defaultCharacter;
+            }
+            MoveCharacter();
+
         }
-        else
-        {
-            characterToMove = defaultCharacter;
-        }
-        MoveCharacter();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void MoveCharacter()
     {       
