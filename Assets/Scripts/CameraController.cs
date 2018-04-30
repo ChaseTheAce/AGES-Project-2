@@ -15,6 +15,11 @@ public class CameraController : MonoBehaviour
     Transform playerTransform;
     private void Start()
     {
+        if (avatarToFollow == null)
+        {
+            avatarToFollow = Door.characterToEnter;
+        }
+
         playerTransform = avatarToFollow.GetComponent<Transform>();
 
         

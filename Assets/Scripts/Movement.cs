@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour
     float runSpeed = 8f;
 
     [SerializeField]
-    public GameObject moveableCharacter;
+    public GameObject moveableCharacter;    
 
     Rigidbody2D playerRigidbody2D;
 
@@ -58,10 +58,9 @@ public class Movement : MonoBehaviour
         playerRigidbody2D.isKinematic = true;
         playerRigidbody2D = moveableCharacter.GetComponent<Rigidbody2D>();
 
-        if (playerRigidbody2D.isKinematic == true)
-        {
+        if (playerRigidbody2D.isKinematic == true)       
             playerRigidbody2D.isKinematic = false;
-        }
+        
     }
 
     private void OnEnable()

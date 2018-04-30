@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Creature : MonoBehaviour 
+public class Creature : Player
 {
-    int health;
+    GameObject gameManager;
 
-    int speed;
+    SpawnCreature spawnCreature;
 
     Rigidbody2D creatureRigidBody;
 
 	// Use this for initialization
 	void Start () 
 	{
+        gameManager = GameObject.Find("Game Manager");
+        spawnCreature = gameManager.GetComponent<SpawnCreature>();
         creatureRigidBody = GetComponent<Rigidbody2D>();
 	}
 	
@@ -21,4 +23,9 @@ public class Creature : MonoBehaviour
 	{
 		
 	}
+
+    public void Die()
+    {
+        spawnCreature.Despawn();
+    }
 }

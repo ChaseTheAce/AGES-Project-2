@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50467846452799706}
   - component: {fileID: 61350230962288980}
   - component: {fileID: 114962851590935126}
+  - component: {fileID: 114770690168619264}
   m_Layer: 0
   m_Name: creature2
   m_TagString: Creature2
@@ -88,6 +89,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114770690168619264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1916067543831158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e55609236ccaa4a987e0228127ba68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114962851590935126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ac0170c3039da4d80feca56d04435d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
 --- !u!212 &212772628114742520
 SpriteRenderer:
   m_ObjectHideFlags: 1

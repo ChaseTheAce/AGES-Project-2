@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnCreature : MonoBehaviour 
+public class SpawnCreature : MonoBehaviour
 {
     public static event Action AvatarChanged;
     
@@ -34,6 +34,8 @@ public class SpawnCreature : MonoBehaviour
 
     GameObject creature;
 
+    public static bool isPlayingCreature3 = false;
+
     bool isPlayingCreature = false;
 
     List<GameObject> spawnedCreatures;
@@ -57,6 +59,7 @@ public class SpawnCreature : MonoBehaviour
         {
             selectedCreature = creature1;
             ControlSelectedCreature();
+            isPlayingCreature3 = false;
         }
         //if ((Input.GetButtonDown("Select1") && isPlayingCreature == false))
         //{
@@ -66,6 +69,7 @@ public class SpawnCreature : MonoBehaviour
         {
             selectedCreature = creature2;
             ControlSelectedCreature();
+            isPlayingCreature3 = false;
         }
         //if (Input.GetButtonDown("Select3") && isPlayingCreature == false)
         //{
@@ -75,6 +79,12 @@ public class SpawnCreature : MonoBehaviour
         {
             selectedCreature = creature3;
             ControlSelectedCreature();
+
+            if (spawnedCreatures.Contains(creature3))
+            {
+                isPlayingCreature3 = true;
+            }
+            
         }
         //if (Input.GetButtonDown("Select3") && isPlayingCreature == false)
         //{
@@ -187,6 +197,14 @@ public class SpawnCreature : MonoBehaviour
         // Destroys the currently controlled creature and swtiches back to main character
         else if (Input.GetButtonDown("Despawn") && (isPlayingCreature == true))
         {
+            Despawn();
+        }
+        
+    }
+
+    public void Despawn()
+    {
+        {
             movement.moveableCharacter = player;
             cameraController.avatarToFollow = player;
             isPlayingCreature = false;
@@ -199,6 +217,5 @@ public class SpawnCreature : MonoBehaviour
             spawnedCreatures.Remove(creature);
             Destroy(creature);
         }
-        
     }
 }
