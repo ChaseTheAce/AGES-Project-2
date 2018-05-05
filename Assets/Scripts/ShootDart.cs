@@ -16,8 +16,8 @@ public class ShootDart : MonoBehaviour {
     [SerializeField]
     float spawnRate;
 
-    [SerializeField]
-    bool isActivated;
+
+    public bool isActivated;
 
     bool canShoot = true;
 

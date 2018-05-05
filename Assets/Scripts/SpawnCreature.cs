@@ -68,20 +68,12 @@ public class SpawnCreature : MonoBehaviour
             ControlSelectedCreature();
             isPlayingCreature3 = false;
         }
-        //if ((Input.GetButtonDown("Select1") && isPlayingCreature == false))
-        //{
-        //    selectedCreature = creature1;
-        //}
         if (Input.GetButtonDown("Select2"))
         {
             selectedCreature = creature2;
             ControlSelectedCreature();
             isPlayingCreature3 = false;
         }
-        //if (Input.GetButtonDown("Select3") && isPlayingCreature == false)
-        //{
-        //    selectedCreature = creature3;
-        //}
         if (Input.GetButtonDown("Select3"))
         {
             selectedCreature = creature3;
@@ -93,10 +85,6 @@ public class SpawnCreature : MonoBehaviour
             }
             
         }
-        //if (Input.GetButtonDown("Select3") && isPlayingCreature == false)
-        //{
-        //    selectedCreature = creature3;
-        //}
     }
 
     private void ControlSelectedCreature()
@@ -156,18 +144,6 @@ public class SpawnCreature : MonoBehaviour
             }
 
         }
-        // Switches to the creature if the user is controlling a creature
-        //else if (Input.GetButtonDown("Switch") && (isPlayingCreature == false))
-        //{
-        //    movement.moveableCharacter = creature;
-        //    cameraController.avatarToFollow = creature;
-        //    isPlayingCreature = true;
-
-        //    if (AvatarChanged != null)
-        //    {
-        //        AvatarChanged.Invoke();
-        //    }
-        //}
     }
 
     private void Spawn()
@@ -216,12 +192,12 @@ public class SpawnCreature : MonoBehaviour
         // Destroys the currently controlled creature and swtiches back to main character
         else if (Input.GetButtonDown("Despawn") && (isPlayingCreature == true))
         {
-            Despawn();
+            Despawn(creature);
         }
         
     }
 
-    public void Despawn()
+    public void Despawn(GameObject creatureToDespawn)
     {
         {
             movement.moveableCharacter = player;
@@ -233,8 +209,8 @@ public class SpawnCreature : MonoBehaviour
                 AvatarChanged.Invoke();
             }
 
-            spawnedCreatures.Remove(creature);
-            Destroy(creature);
+            spawnedCreatures.Remove(creatureToDespawn);
+            Destroy(creatureToDespawn);
         }
     }
 }

@@ -9,7 +9,7 @@ public class LocationData : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.SpawnPlayer();
-        GameManager.Load();
+        //GameManager.Load();
     }
 
 }

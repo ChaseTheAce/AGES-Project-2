@@ -22,6 +22,10 @@ public class Dart : MonoBehaviour {
             Creature creature = collision.collider.GetComponent<Creature>();
             creature.Die();
         }
+        else
+        {
+            Destroy(gameObject);
+        }
         
     }
     private void OnTriggerExit2D(Collider2D collision)

@@ -18,16 +18,22 @@ public class Movement : MonoBehaviour
 
     float vertical;
 
+    bool playerMoving = false;
+
+    Animator anim;
+
 
 	// Use this for initialization
 	void Start () 
 	{
         
+
         if (moveableCharacter == null)
         {
             moveableCharacter = GameManager.Instance.spawnedPlayer;
         }
         playerRigidbody2D = moveableCharacter.GetComponent<Rigidbody2D>();
+        anim = moveableCharacter.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -52,6 +58,21 @@ public class Movement : MonoBehaviour
         playerRigidbody2D.velocity =
             new Vector2(horizontal, vertical) * walkSpeed * Time.deltaTime;
 
+        if (playerRigidbody2D.velocity.magnitude > .1f)
+        {
+            playerMoving = true;
+        }
+        else
+        {
+            playerMoving = false;
+        }
+
+        anim.SetFloat("MoveX", Input.GetAxis("Horizontal"));
+        anim.SetFloat("MoveY", Input.GetAxis("Vertical"));
+        anim.SetBool("PlayerMoving", playerMoving);
+        //anim.SetFloat("LastMoveX", movement.x);
+        //anim.SetFloat("LastMoveY", movement.y);
+
     }
 
     private void UpdateRigidBody()
@@ -59,6 +80,7 @@ public class Movement : MonoBehaviour
         playerRigidbody2D.velocity = Vector2.zero;
         playerRigidbody2D.isKinematic = true;
         playerRigidbody2D = moveableCharacter.GetComponent<Rigidbody2D>();
+        anim = moveableCharacter.GetComponent<Animator>();
 
         if (playerRigidbody2D.isKinematic == true)       
             playerRigidbody2D.isKinematic = false;

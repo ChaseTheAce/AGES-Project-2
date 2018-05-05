@@ -26,6 +26,6 @@ public class Creature : Player
 
     public void Die()
     {
-        spawnCreature.Despawn();
+        spawnCreature.Despawn(this.gameObject);
     }
 }
