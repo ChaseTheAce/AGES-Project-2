@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnCreature : MonoBehaviour
 {
@@ -34,7 +35,13 @@ public class SpawnCreature : MonoBehaviour
 
     GameObject creature;
 
-    public static bool isPlayingCreature3 = false;
+    Text creatureSelectText;
+
+    public bool canSpawnCreature2;
+
+    public bool canSpawnCreature3;
+
+    //public static bool isPlayingCreature3 = false;
 
     bool isPlayingCreature = false;
 
@@ -66,23 +73,42 @@ public class SpawnCreature : MonoBehaviour
         {
             selectedCreature = creature1;
             ControlSelectedCreature();
-            isPlayingCreature3 = false;
+            creatureSelectText.text = ("Skeleton Knight");
+            //isPlayingCreature3 = false;
         }
-        if (Input.GetButtonDown("Select2"))
+        if (Input.GetButtonDown("Select2") && canSpawnCreature2)
         {
-            selectedCreature = creature2;
-            ControlSelectedCreature();
-            isPlayingCreature3 = false;
-        }
-        if (Input.GetButtonDown("Select3"))
-        {
-            selectedCreature = creature3;
-            ControlSelectedCreature();
-
-            if (spawnedCreatures.Contains(creature3))
+            if (canSpawnCreature2)
             {
-                isPlayingCreature3 = true;
+                selectedCreature = creature2;
+                ControlSelectedCreature();
+                creatureSelectText.text = ("Mini Skeleton");
+                //isPlayingCreature3 = false;
             }
+            else if(!canSpawnCreature2)
+            {
+                creatureSelectText.text = ("Mini Skeleton Locked!");
+            }
+
+        }
+        if (Input.GetButtonDown("Select3") && canSpawnCreature3)
+        {
+            if (canSpawnCreature3)
+            {
+                selectedCreature = creature3;
+                ControlSelectedCreature();
+                creatureSelectText.text = ("Skeleton Mage");
+            }
+            else if (!canSpawnCreature3)
+            {
+                creatureSelectText.text = ("Skeleton Mage Locked!");
+            }
+            
+
+            //if (spawnedCreatures.Contains(creature3))
+            //{
+            //    isPlayingCreature3 = true;
+            //}
             
         }
     }
