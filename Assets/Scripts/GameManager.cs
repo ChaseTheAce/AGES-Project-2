@@ -35,14 +35,6 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
 
-
-        // Instantiate player prefab if 1st time running
-        //if (hasEnteredDoor == false)
-        //{
-        //    spawnedPlayer = Instantiate(playerPrefab, startingSpawn) as GameObject;
-        //    spawnedPlayer.transform.parent = null;
-        //}
-        
     }
 
     public static void Save()
@@ -94,6 +86,7 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer()
     {
         spawnedPlayer = Instantiate(playerPrefab, startingSpawn) as GameObject;
+        spawnedPlayer.transform.position = startingSpawn.position;
         spawnedPlayer.transform.parent = null;
     }
 }
