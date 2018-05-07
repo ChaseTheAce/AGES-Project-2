@@ -8,7 +8,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    Transform startingSpawn;
+    public Transform startingSpawn;
 
     [SerializeField]
     GameObject playerPrefab;

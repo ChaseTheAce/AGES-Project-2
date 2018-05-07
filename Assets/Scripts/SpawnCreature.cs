@@ -132,23 +132,6 @@ public class SpawnCreature : MonoBehaviour
         }
     }
 
-    #region Button Fucntions
-    public void SelectCreature1BtnPressed()
-    {
-        selectedCreature = creature1;
-    }
-
-    public void SelectCreature2BtnPressed()
-    {
-        selectedCreature = creature2;
-    }
-
-    public void SelectCreature3BtnPressed()
-    {
-        selectedCreature = creature3;
-    }
-    #endregion
-
     private void Switch()
     {
         if (player == null)

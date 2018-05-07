@@ -12,7 +12,6 @@ public class Teleporter : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(SpawnCreature.isPlayingCreature3);
 
         if (collision.tag == "Creature3" && hasTeleported == false)
         {
