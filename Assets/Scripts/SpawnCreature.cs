@@ -272,4 +272,22 @@ public class SpawnCreature : MonoBehaviour
             Destroy(creatureToDespawn);
         }
     }
+
+    public void DespawnAll()
+    {
+        List<GameObject> tempList = new List<GameObject>();
+
+        foreach (GameObject creature in spawnedCreatures)
+        {
+            if (creature != null)
+                tempList.Add(creature);
+        }
+
+        foreach (GameObject creature in tempList)
+        {            
+                spawnedCreatures.Remove(creature);
+                Destroy(creature.gameObject);
+            
+        }
+    }
 }

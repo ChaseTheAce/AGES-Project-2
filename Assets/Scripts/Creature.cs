@@ -10,22 +10,31 @@ public class Creature : Player
 
     Rigidbody2D creatureRigidBody;
 
+    public PressurePlate pressurePlate;
+
 	// Use this for initialization
 	void Start () 
 	{
+
         gameManager = GameObject.Find("Game Manager");
         spawnCreature = gameManager.GetComponent<SpawnCreature>();
         creatureRigidBody = GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
-
     public void Die()
     {
+        if (pressurePlate != null)
+        {
+            pressurePlate.DeactivatePlate();
+        }
+
+        StartCoroutine(Wait());
+        
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(.1f);
         spawnCreature.Despawn(this.gameObject);
     }
 }

@@ -21,6 +21,8 @@ public class PressurePlate : MonoBehaviour {
 
     GameObject presser;
 
+    Creature pressingCreature;
+
     private bool isPressed = false;
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -39,6 +41,8 @@ public class PressurePlate : MonoBehaviour {
         if (collision.tag == "Invulnerable" && isActivatableByCreature1 == true)
         {
             presser = collision.gameObject;
+            pressingCreature = presser.GetComponent<Creature>();
+            pressingCreature.pressurePlate = this;
             isPressed = true;
             ActivatePlate();
         }
@@ -46,13 +50,18 @@ public class PressurePlate : MonoBehaviour {
         if (collision.tag == "Creature2" && isActivatableByCreature2 == true)
         {
             presser = collision.gameObject;
+            pressingCreature = presser.GetComponent<Creature>();
+            pressingCreature.pressurePlate = this;
             isPressed = true;
             ActivatePlate();
+
         }
 
         if (collision.tag == "Creature3" && isActivatableByCreature3 == true)
         {
             presser = collision.gameObject;
+            pressingCreature = presser.GetComponent<Creature>();
+            pressingCreature.pressurePlate = this;
             isPressed = true;
             ActivatePlate();
         }
@@ -63,7 +72,7 @@ public class PressurePlate : MonoBehaviour {
         DeactivatePlate();
     }
 
-    private void DeactivatePlate()
+    public void DeactivatePlate()
     {
         isPressed = false;
     }

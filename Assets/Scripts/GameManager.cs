@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject spawnedPlayer;
 
-
     public static bool hasEnteredDoor = false;
 
     private const string saveFileName = "saveData.dat";
@@ -35,7 +34,10 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
 
+        
     }
+
+
 
     public static void Save()
     {

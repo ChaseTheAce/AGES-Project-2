@@ -5,8 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour 
 {
+    SpawnCreature spawnCreature;
+
+    private void Start()
+    {
+        spawnCreature = GameManager.Instance.gameObject.GetComponent<SpawnCreature>();
+    }
+
     public void Die()
     {
+        spawnCreature.DespawnAll();
         gameObject.transform.position = Checkpoint.respawnPoint.position;
+        
     }
 }
