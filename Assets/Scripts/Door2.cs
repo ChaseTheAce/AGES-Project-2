@@ -23,6 +23,8 @@ public class Door2 : MonoBehaviour
         {
             characterToEnter = collision.gameObject;            
             characterToEnter.transform.position = ExitTransform.position;
+            Camera camera = GameManager.Instance.gameObject.GetComponentInChildren<Camera>();
+            camera.transform.position = ExitTransform.position;
             hasEntered = true;
             StartCoroutine(DoorReset());
         }

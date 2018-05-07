@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour {
 
+    // I was trying to load a new scene and save the positions of all characters who didn't go through the door but it was giving me a lot of trouble so I didnt acutally use this along with the save/load in game manager
+
     [SerializeField]
     Object sceneToLoad;
 

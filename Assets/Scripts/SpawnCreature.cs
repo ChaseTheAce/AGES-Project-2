@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SpawnCreature : MonoBehaviour
 {
     public static event Action AvatarChanged;
-    
+
     #region Serialized Fields
     [SerializeField]
     GameObject player;
@@ -35,7 +35,17 @@ public class SpawnCreature : MonoBehaviour
 
     GameObject creature;
 
+    [SerializeField]
+    GameObject helpPanel;
+
+    [SerializeField]
     Text creatureSelectText;
+
+    [SerializeField]
+    Text creature2Text;
+
+    [SerializeField]
+    Text creature3Text;
 
     public bool canSpawnCreature2;
 
@@ -64,6 +74,7 @@ public class SpawnCreature : MonoBehaviour
         SelectCreature();
         Switch();
         Spawn();
+        ToggleHelp();
     }
 
     private void SelectCreature()
@@ -73,7 +84,7 @@ public class SpawnCreature : MonoBehaviour
         {
             selectedCreature = creature1;
             ControlSelectedCreature();
-            creatureSelectText.text = ("Skeleton Knight");
+            creatureSelectText.text = ("Selected Spawn: Skeleton Knight");
             //isPlayingCreature3 = false;
         }
         if (Input.GetButtonDown("Select2") && canSpawnCreature2)
@@ -82,10 +93,10 @@ public class SpawnCreature : MonoBehaviour
             {
                 selectedCreature = creature2;
                 ControlSelectedCreature();
-                creatureSelectText.text = ("Mini Skeleton");
+                creatureSelectText.text = ("Selected Spawn: Mini Skeleton");
                 //isPlayingCreature3 = false;
             }
-            else if(!canSpawnCreature2)
+            else if (!canSpawnCreature2)
             {
                 creatureSelectText.text = ("Mini Skeleton Locked!");
             }
@@ -97,18 +108,57 @@ public class SpawnCreature : MonoBehaviour
             {
                 selectedCreature = creature3;
                 ControlSelectedCreature();
-                creatureSelectText.text = ("Skeleton Mage");
+                creatureSelectText.text = ("Selected Spawn: Skeleton Mage");
             }
             else if (!canSpawnCreature3)
             {
                 creatureSelectText.text = ("Skeleton Mage Locked!");
             }
-            
+
 
             //if (spawnedCreatures.Contains(creature3))
             //{
             //    isPlayingCreature3 = true;
             //}
+
+        }
+    }
+
+    void SetHelpText()
+    {
+        if (!canSpawnCreature2)
+        {
+            creature2Text.text = "2: Mini Skeleton Locked!";
+        }
+        if (canSpawnCreature2)
+        {
+            creature2Text.text = "2: Mini Skeleton";
+        }
+        if (!canSpawnCreature3)
+        {
+            creature3Text.text = "3: Skeleton Mage Locked!";
+        }
+        if (canSpawnCreature3)
+        {
+            creature3Text.text = "3: Skeleton Mage";
+        }
+    }
+
+    void ToggleHelp()
+    {
+        if(Input.GetButtonDown("Help"))
+        {
+            SetHelpText();
+            if (!helpPanel.activeSelf)
+            {
+                helpPanel.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else if (helpPanel.activeSelf)
+            {
+                helpPanel.SetActive(false);
+                Time.timeScale = 1;
+            }
             
         }
     }
